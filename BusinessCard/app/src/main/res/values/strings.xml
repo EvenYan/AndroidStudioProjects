@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Business Card</string>
+    <string name="bottom_tab_know">Business Card</string>
+    <string name="bottom_tab_wantknow">Business Card</string>
+    <string name="bottom_tab_my">Business Card</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
