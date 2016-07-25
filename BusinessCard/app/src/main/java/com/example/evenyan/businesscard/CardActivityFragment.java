@@ -2,7 +2,6 @@ package com.example.evenyan.businesscard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.io.IOException;
  * @author wwj_748
  *
  */
-public class CardFragment extends Fragment {
+public class CardActivityFragment extends Fragment {
 
     public static final int TAKE_PHOTO = 1;
 
@@ -53,6 +53,8 @@ public class CardFragment extends Fragment {
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Toast.makeText(getActivity(), "Ok", Toast.LENGTH_SHORT).show();
                 // 创建File对象,用于存储拍照后的图片
                 File outputImage = new File(Environment.
                         getExternalStorageDirectory(), "tempImage.jpg");
@@ -68,7 +70,6 @@ public class CardFragment extends Fragment {
                 Intent intent = new Intent("android.media.action. IMAGE_CAPTURE");
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, TAKE_PHOTO); // 启动相机程序
-
             }
         });
 

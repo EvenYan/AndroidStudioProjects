@@ -143,7 +143,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
      */
     private void clickTab2Layout() {
         if (cardFragment == null) {
-            cardFragment = new CardFragment();
+            cardFragment = new CardActivityFragment();
         }
         addOrShowFragment(getSupportFragmentManager().beginTransaction(), cardFragment);
 
