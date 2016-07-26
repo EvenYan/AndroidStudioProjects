@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class CardActivityFragment extends Fragment {
     private ImageView iv;
     private Uri fileUri;
     private ImageView picture;
+    private ContactDatebase dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,15 @@ public class CardActivityFragment extends Fragment {
 
         iv = (ImageView)view.findViewById(R.id.iv_camera);
 //        picture = (ImageView)view.findViewById(R.id.picture);
+
+        dbHelper = new ContactDatebase(getActivity(), "Contact.db", null, 1);
+        Button createDatabase = (Button) view.findViewById(R.id.create_database);
+        createDatabase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHelper.getWritableDatabase();
+            }
+        });
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
