@@ -40,14 +40,15 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/home_nor"
                     android:contentDescription="@null"/>
-                <TextView
-                    android:id="@+id/tv_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_know"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_know"
-                    android:textSize="12sp" />
+                <!--设置底部第一个导航键的文本-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_know"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/iv_know"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:text="@string/bottom_tab_know"-->
+                    <!--android:textSize="12sp" />-->
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/rl_want_know"
@@ -61,14 +62,14 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/card_nor"
                     android:contentDescription="@null" />
-                <TextView
-                    android:id="@+id/tv_i_want_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_i_want_know"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_wantknow"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_i_want_know"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/iv_i_want_know"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:text="@string/bottom_tab_wantknow"-->
+                    <!--android:textSize="12sp" />-->
             </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/rl_me"
@@ -82,14 +83,14 @@
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/me_nor"
                     android:contentDescription="@null" />
-                <TextView
-                    android:id="@+id/tv_me"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_me"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_my"
-                    android:textSize="12sp" />
+                <!--<TextView-->
+                    <!--android:id="@+id/tv_me"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/iv_me"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:text="@string/bottom_tab_my"-->
+                    <!--android:textSize="12sp" />-->
             </RelativeLayout>
         </LinearLayout>
         <!-- 内容部分， fragment切换 -->
@@ -99,10 +100,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
         </LinearLayout>
-        <!--<View-->
-            <!--android:id="@+id/line"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:layout_above="@id/ll_bottom_tab" />-->
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@id/ll_bottom_tab" />
     </RelativeLayout>
 </FrameLayout>

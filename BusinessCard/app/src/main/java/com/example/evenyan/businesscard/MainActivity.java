@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 /**
  * 主Activity
@@ -42,7 +41,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     // 底部标签图片
     private ImageView homeImg, cardImg, meImg;
     // 底部标签的文本
-    private TextView homeTv, cardTv, meTv;
+//    private TextView homeTv, cardTv, meTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +66,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         homeImg = (ImageView) findViewById(R.id.iv_know);
         cardImg = (ImageView) findViewById(R.id.iv_i_want_know);
         meImg = (ImageView) findViewById(R.id.iv_me);
-        homeTv = (TextView) findViewById(R.id.tv_know);
-        cardTv = (TextView) findViewById(R.id.tv_i_want_know);
-        meTv = (TextView) findViewById(R.id.tv_me);
+//        homeTv = (TextView) findViewById(R.id.tv_know);
+//        cardTv = (TextView) findViewById(R.id.tv_i_want_know);
+//        meTv = (TextView) findViewById(R.id.tv_me);
 
     }
 
@@ -90,13 +89,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
             currentFragment = homeFragment;
             // 设置图片文本的变化
             homeImg.setImageResource(R.drawable.home_pre);
-            homeTv.setTextColor(getResources()
-                    .getColor(R.color.bottomtab_press));
+//            homeTv.setTextColor(getResources()
+//                    .getColor(R.color.bottomtab_press));
             cardImg.setImageResource(R.drawable.card_nor);
-            cardTv.setTextColor(getResources().getColor(
-                    R.color.bottomtab_normal));
+//            cardTv.setTextColor(getResources().getColor(
+//                    R.color.bottomtab_normal));
             meImg.setImageResource(R.drawable.me_nor);
-            meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
+//            meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
 
         }
 
@@ -130,12 +129,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
         // 设置底部tab变化
         homeImg.setImageResource(R.drawable.home_pre);
-        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_press));
+//        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_press));
         cardImg.setImageResource(R.drawable.card_nor);
-        cardTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_normal));
+//        cardTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_normal));
         meImg.setImageResource(R.drawable.me_nor);
-        meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
+//        meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
     }
 
     /**
@@ -148,12 +147,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         addOrShowFragment(getSupportFragmentManager().beginTransaction(), cardFragment);
 
         homeImg.setImageResource(R.drawable.home_nor);
-        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
+//        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
         cardImg.setImageResource(R.drawable.card_pre);
-        cardTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_press));
+//        cardTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_press));
         meImg.setImageResource(R.drawable.me_nor);
-        meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
+//        meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
 
     }
 
@@ -167,12 +166,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 
         addOrShowFragment(getSupportFragmentManager().beginTransaction(), meFragment);
         homeImg.setImageResource(R.drawable.home_nor);
-        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
+//        homeTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
         cardImg.setImageResource(R.drawable.card_nor);
-        cardTv.setTextColor(getResources().getColor(
-                R.color.bottomtab_normal));
+//        cardTv.setTextColor(getResources().getColor(
+//                R.color.bottomtab_normal));
         meImg.setImageResource(R.drawable.me_pre);
-        meTv.setTextColor(getResources().getColor(R.color.bottomtab_press));
+//        meTv.setTextColor(getResources().getColor(R.color.bottomtab_press));
 
     }
 

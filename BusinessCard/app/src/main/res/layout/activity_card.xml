@@ -4,4 +4,4 @@
     android:name="com.example.evenyan.businesscard.CardActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout="@layout/fragment_card2" />
+    tools:layout="@layout/fragment_card" />
