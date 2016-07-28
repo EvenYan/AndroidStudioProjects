@@ -37,8 +37,8 @@ public class CardContent extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_card_content);
-//        picture = (ImageView)findViewById(R.id.picture);
+        setContentView(R.layout.activity_card_content);
+        picture = (ImageView)findViewById(R.id.picture);
 
         // 创建File对象,用于存储拍照后的图片
         File outputImage = new File(Environment.
@@ -61,13 +61,7 @@ public class CardContent extends Activity {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
         startActivityForResult(intent, TAKE_PHOTO); // 启动相机程序
-        try {
-            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
-            String bs64 =bitmaptoString(bitmap);
-//            Toast.makeText(this, bs64.substring(0, 20), Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
 //        try {
 //            Toast.makeText(this, imgToBase64(uri, BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri)), "jpg").substring(0, 20), Toast.LENGTH_LONG).show();
@@ -94,10 +88,10 @@ public class CardContent extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode == RESULT_OK) {
-            Toast.makeText(this, "heoll", Toast.LENGTH_SHORT).show();
-
-        }
+//        if (resultCode == RESULT_OK) {
+//            Toast.makeText(this, "heoll", Toast.LENGTH_SHORT).show();
+//
+//        }
 
 //        if(requestCode == getActivity().RESULT_OK){
 //            if(requestCode == TAKE_PHOTO) {
@@ -110,27 +104,39 @@ public class CardContent extends Activity {
 //            return;
 //        }
 
-//        switch (resultCode) {
-//            case REQUEST_CAPTURE_IMAGE:
-//                if (resultCode == RESULT_OK) {
-//                    Intent intent = new Intent("com.android.camera.action.CROP");
-//                    intent.setDataAndType(fileUri, "image/*");
-//                    intent.putExtra("scale", true);
-//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-//                    startActivityForResult(intent, SEND_PICTURE);
-//
-//                }
-//                break;
-//            case SEND_PICTURE:
-//                if (resultCode == RESULT_OK) {
+        switch (requestCode) {
+            case REQUEST_CAPTURE_IMAGE:
+                if (resultCode == RESULT_OK) {
+//                    Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(fileUri, "image/*");
+                    intent.putExtra("scale", true);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent, SEND_PICTURE);
+
+                }
+                break;
+            case SEND_PICTURE:
+                if (resultCode == RESULT_OK) {
 //                    try {
 //                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
+//                        if (bitmap != null){
+//                            Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show();
+//                        }
 //                        picture.setImageBitmap(bitmap);
 //                    } catch (FileNotFoundException e) {
 //                        e.printStackTrace();
 //                    }
-//
-//                }
+        try {
+            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
+            String bs64 =bitmaptoString(bitmap);
+            Toast.makeText(this, bs64.substring(0, 20), Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+                }
 //        file = new File(String.valueOf(fileUri));
 //
 //        FileInputStream inputFile = new FileInputStream(file);
@@ -138,11 +144,11 @@ public class CardContent extends Activity {
 //        inputFile.read(buffer);
 //        inputFile.close();
 //        String bs64 = Base64.encodeToString(buffer, Base64.DEFAULT);
-//                break;
-//            default:
-//                break;
+                break;
+            default:
+                break;
 //
-//        }
+        }
     }
 
     public static String createFileName() {
