@@ -33,8 +33,8 @@
         android:layout_height="fill_parent">
         <ListView
             android:id="@+id/list_view_user_list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="438dp"
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:layout_gravity="top"
@@ -49,22 +49,5 @@
             />
 
     </FrameLayout>
-
-    <!--<Button-->
-        <!--android:id="@+id/create_database"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="216dp"-->
-        <!--android:text="Hello"-->
-        <!--android:visibility="visible"-->
-        <!--android:background="@color/black"/>-->
-
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="这是CardFragment页"-->
-        <!--android:textSize="18sp"-->
-        <!--android:layout_gravity="center"-->
-        <!--/>-->
 
 </LinearLayout>

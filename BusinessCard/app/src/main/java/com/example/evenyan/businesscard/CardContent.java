@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,6 +22,10 @@ import java.io.IOException;
 import java.util.Date;
 
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class CardContent extends Activity {
 
@@ -31,6 +38,8 @@ public class CardContent extends Activity {
     public static final String TAG = "MainActivity";
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String uri;
+    public String bs64;
+    public String json;
 
     public static final int REQUEST_CAPTURE_IMAGE = 1;
 
@@ -39,6 +48,7 @@ public class CardContent extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_content);
         picture = (ImageView)findViewById(R.id.picture);
+
 
         // 创建File对象,用于存储拍照后的图片
         File outputImage = new File(Environment.
@@ -63,25 +73,6 @@ public class CardContent extends Activity {
         startActivityForResult(intent, TAKE_PHOTO); // 启动相机程序
 
 
-//        try {
-//            Toast.makeText(this, imgToBase64(uri, BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri)), "jpg").substring(0, 20), Toast.LENGTH_LONG).show();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-
-        //开启一个线程,做联网操作
-//        new Thread(){
-//            @Override
-//            public void run(){
-//                OkHttpClient client = new OkHttpClient();
-//                String post(String url, String json) throws IOException{
-//                    RequestBody body = new RequestBody.create(JSON, json);
-//
-//                }
-//            }
-//        }.start();
-
     }
 
 
@@ -89,7 +80,6 @@ public class CardContent extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 //        if (resultCode == RESULT_OK) {
-//            Toast.makeText(this, "heoll", Toast.LENGTH_SHORT).show();
 //
 //        }
 
@@ -107,13 +97,13 @@ public class CardContent extends Activity {
         switch (requestCode) {
             case REQUEST_CAPTURE_IMAGE:
                 if (resultCode == RESULT_OK) {
-//                    Toast.makeText(this, "Ok", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(fileUri, "image/*");
                     intent.putExtra("scale", true);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                     startActivityForResult(intent, SEND_PICTURE);
+
 
                 }
                 break;
@@ -128,22 +118,31 @@ public class CardContent extends Activity {
 //                    } catch (FileNotFoundException e) {
 //                        e.printStackTrace();
 //                    }
-        try {
+            try {
             Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
-            String bs64 =bitmaptoString(bitmap);
-            Toast.makeText(this, bs64.substring(0, 20), Toast.LENGTH_LONG).show();
+            bs64 =bitmaptoString(bitmap);
+//            Toast.makeText(this, bs64.substring(0, 20), Toast.LENGTH_LONG).show();
+
+            //        开启一个线程,做联网操作
+            new Thread(){
+                @Override
+                public void run(){
+                    try {
+                        postPicture(bs64);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }.start();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
                 }
-//        file = new File(String.valueOf(fileUri));
-//
-//        FileInputStream inputFile = new FileInputStream(file);
-//        byte[] buffer = new byte[(int)file.length()];
-//        inputFile.read(buffer);
-//        inputFile.close();
-//        String bs64 = Base64.encodeToString(buffer, Base64.DEFAULT);
+
+
                 break;
             default:
                 break;
@@ -188,48 +187,6 @@ public class CardContent extends Activity {
 //        }
 //    }
 
-//    public static String imgToBase64(String imgPath, Bitmap bitmap, String imgFormat) {
-////        String imgPath = String.valueOf(imgUri);
-//        if (imgPath !=null && imgPath.length() > 0) {
-//            bitmap = readBitmap(imgPath);
-//        }
-//        if(bitmap == null){
-//            //bitmap not found!!
-//        }
-//        ByteArrayOutputStream out = null;
-//        try {
-//            out = new ByteArrayOutputStream();
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-//
-//            out.flush();
-//            out.close();
-//
-//            byte[] imgBytes = out.toByteArray();
-//            return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            return null;
-//        } finally {
-//            try {
-//                out.flush();
-//                out.close();
-//            } catch (IOException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private static Bitmap readBitmap(String imgPath) {
-//        try {
-//            return BitmapFactory.decodeFile(imgPath);
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            return null;
-//        }
-//
-//    }
-
     public String bitmaptoString(Bitmap bitmap) {
 
         // 将Bitmap转换成字符串
@@ -239,6 +196,57 @@ public class CardContent extends Activity {
         byte[] bytes = bStream.toByteArray();
         string = Base64.encodeToString(bytes, Base64.DEFAULT);
         return string;
+    }
+
+
+
+    public Response postPicture(String string) throws JSONException {
+//        Map<String, Object> map = new HashMap<String, Object>();
+//        map.put("uid", "118.12.0.12");
+//        map.put("lang", "chns");
+//        map.put("color", "original");
+//        map.put("image", "hello");
+//        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+//        list.add(map);
+//        Gson gson = new Gson();
+//        json = gson.toJson(list);
+//        json.toString();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("uid", "118.12.0.12");
+        jsonObject.put("lang", "chns");
+        jsonObject.put("color", "original");
+        jsonObject.put("image", string);
+        json = jsonObject.toString();
+        Log.d(TAG, json);
+
+        //申明给服务端传递一个json串
+        //创建一个OkHttpClient对象
+        OkHttpClient okHttpClient = new OkHttpClient();
+        //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        //创建一个请求对象
+        Request request = new Request.Builder()
+                .url("http://api.hanvon.com/rt/ws/v1/ocr/bcard/recg?key=84407f1b-56c9-4077-89d8-2396f24b26b1&code=cf22e3bb-d41c-47e0-aa44-a92984f5829d")
+                .post(requestBody)
+                .build();
+        //发送请求获取响应
+        Response response = null;
+        try {
+            response = okHttpClient.newCall(request).execute();
+            //判断请求是否成功
+            if (response.isSuccessful()) {
+                //打印服务端返回结果
+                Log.i(TAG, response.body().string());
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return response;
     }
 
 }

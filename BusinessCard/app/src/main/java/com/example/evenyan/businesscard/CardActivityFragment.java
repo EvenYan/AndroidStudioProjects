@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import okhttp3.MediaType;
@@ -28,6 +30,9 @@ public class CardActivityFragment extends Fragment {
     private ContactDatebase dbHelper;
     public static final String TAG = "MainActivity";
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
+
+    private String[] data = { "Apple", "Banana", "Orange", "Watermelon", "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,9 @@ public class CardActivityFragment extends Fragment {
                 false);
 
         iv = (ImageView)view.findViewById(R.id.iv_camera);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+        ListView listView = (ListView) view.findViewById(R.id.list_view_user_list);
+        listView.setAdapter(adapter);
 //        picture = (ImageView)view.findViewById(R.id.picture);
 
 //        dbHelper = new ContactDatebase(getActivity(), "Contact.db", null, 1);
