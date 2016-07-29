@@ -192,7 +192,7 @@ public class CardContent extends Activity {
         // 将Bitmap转换成字符串
         String string = null;
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bStream);
         byte[] bytes = bStream.toByteArray();
         string = Base64.encodeToString(bytes, Base64.DEFAULT);
         return string;
@@ -227,7 +227,7 @@ public class CardContent extends Activity {
         RequestBody requestBody = RequestBody.create(JSON, json);
         //创建一个请求对象
         Request request = new Request.Builder()
-                .url("http://api.hanvon.com/rt/ws/v1/ocr/bcard/recg?key=84407f1b-56c9-4077-89d8-2396f24b26b1&code=cf22e3bb-d41c-47e0-aa44-a92984f5829d")
+                .url("http://api.hanvon.com/rt/ws/v1/ocr/bcard/recg?key=eb4801a6-eaf8-49ec-a750-cc1385862ee9&code=cf22e3bb-d41c-47e0-aa44-a92984f5829d")
                 .post(requestBody)
                 .build();
         //发送请求获取响应

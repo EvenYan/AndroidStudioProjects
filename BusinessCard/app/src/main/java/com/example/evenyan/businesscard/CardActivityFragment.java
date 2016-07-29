@@ -8,12 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.MediaType;
+import utility.Contact;
+import utility.ContactAdapter;
 
 /**
  * 我想知道的碎片页面
@@ -31,7 +36,8 @@ public class CardActivityFragment extends Fragment {
     public static final String TAG = "MainActivity";
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
 
-    private String[] data = { "Apple", "Banana", "Orange", "Watermelon", "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
+//    private String[] data = { "Apple", "Banana", "Orange", "Watermelon", "Pear", "Grape", "Pineapple", "Strawberry", "Cherry", "Mango" };
+    private List<Contact> contactList = new ArrayList<Contact>();
 
 
     @Override
@@ -60,10 +66,24 @@ public class CardActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_card, container,
                 false);
 
-        iv = (ImageView)view.findViewById(R.id.iv_camera);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+        initContact();
+        ContactAdapter adapter = new ContactAdapter(getActivity(), R.layout.contact_item, contactList);
         ListView listView = (ListView) view.findViewById(R.id.list_view_user_list);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent editContact = new Intent(getActivity(), EditContactActivity.class);
+                startActivity(editContact);
+            }
+        });
+
+
+        iv = (ImageView)view.findViewById(R.id.iv_camera);
+        //ListView的Demo
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, data);
+//        ListView listView = (ListView) view.findViewById(R.id.list_view_user_list);
+//        listView.setAdapter(adapter);
 //        picture = (ImageView)view.findViewById(R.id.picture);
 
 //        dbHelper = new ContactDatebase(getActivity(), "Contact.db", null, 1);
@@ -89,6 +109,26 @@ public class CardActivityFragment extends Fragment {
         return view;
     }
 
+    private void initContact() {
+        Contact ZhangShan = new Contact(R.drawable.user, "张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact LiSi = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact WangWu = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact ErGou = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact ShaDan = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact DaWa = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact ErWa = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact SanWa = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+        Contact SiWa = new Contact(R.drawable.user,"张三    ", "HR    ", "网易");
+        contactList.add(ZhangShan);
+    }
 
 
     /**
